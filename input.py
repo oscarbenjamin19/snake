@@ -8,4 +8,6 @@ def get_key():
             return {b'H': 'UP', b'P': 'DOWN', b'K': 'LEFT', b'M': 'RIGHT'}.get(key)
         if key == b'q':
             return 'QUIT'
+        if key in (b's', b'S'):
+            return 'RESTART'
     return None

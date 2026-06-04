@@ -1,3 +1,4 @@
+import msvcrt
 import os
 import random
 import time
@@ -12,10 +13,7 @@ def place_food(snake):
         if pos not in snake:
             return pos
 
-def main():
-    os.system("cls")
-    os.system("")
-
+def game_loop():
     snake = [(HEIGHT // 2, WIDTH // 2), (HEIGHT // 2, WIDTH // 2 - 1)]
     direction = (0, 1)
     food = place_food(snake)
@@ -25,7 +23,7 @@ def main():
     while True:
         key = get_key()
         if key == 'QUIT':
-            break
+            return False
         elif key == 'UP'    and direction != (1, 0):  direction = (-1, 0)
         elif key == 'DOWN'  and direction != (-1, 0): direction = (1, 0)
         elif key == 'LEFT'  and direction != (0, 1):  direction = (0, -1)
@@ -52,7 +50,23 @@ def main():
     print("=" * (WIDTH + 2))
     print("  *** GAME OVER ***")
     print(f"  Dein Score: {score}")
+    print("  [S] Neu starten   [Q] Beenden")
     print("=" * (WIDTH + 2))
+
+    while True:
+        if msvcrt.kbhit():
+            key = msvcrt.getch().lower()
+            if key == b's':
+                return True
+            if key == b'q':
+                return False
+
+def main():
+    os.system("cls")
+    os.system("")
+
+    while game_loop():
+        os.system("cls")
 
 if __name__ == "__main__":
     main()
