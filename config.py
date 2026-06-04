@@ -1,0 +1,2 @@
+WIDTH  = 40
+HEIGHT = 20
